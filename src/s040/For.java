@@ -6,7 +6,7 @@ public class For {
             System.out.println("Begin block loop " + i);
 
             if (i == 2) {
-                continue;
+                continue;//non viene eseguita l'istruzione successiva quando è verificato if
             }
 
             System.out.println("End block loop " + i);
