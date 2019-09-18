@@ -9,7 +9,7 @@ public class AboutString {
 
         System.out.println("char at position 1 in s: " + s.charAt(1));
 
-        System.out.println("s < t: " + s.compareTo(t));
+        System.out.println("s < t: " + s.compareTo(t)); 
         System.out.println("t > s: " + t.compareTo(s));
 
         System.out.println("concat s and t: " + s.concat(t));
@@ -36,7 +36,7 @@ public class AboutString {
         String s2 = s.replace('l', 'q');
         System.out.println("Replacing 'l' with 'q': " + s + " -> " + s2);
 
-        String[] splits = "one for me, one for you".split(" ");
+        String[] splits = "one for me, one for you".split("");
         System.out.println("Splitting: ");
         for (String token : splits) {
             System.out.println(token);
