@@ -86,6 +86,7 @@ class S55Test {
 
     @Test
     void multiplicationTable() {
+    	
         fail("Not yet implemented");
     }
 }

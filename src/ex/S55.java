@@ -81,11 +81,21 @@ public class S55 {
 	 * @param value
 	 * @return The multiplication table for value, when possible
 	 */
-	public static int[][] multiplicationTable(int value) {
-		int[][] result = new int[0][0];
+	public static void main(String[] args) {
+		multiplicationTable(3);
+	}
 
-		// TODO
+	public static void multiplicationTable(int value) {
+		int[][] result = new int[value][value];
+		for (int i = 0; i < value; i++) {
+			for (int j = 0; j < value; j++) {
+				result[i][j] = (i + 1) * (j + 1);
+				System.out.print(result[i][j]);
+				System.out.print(" ");
 
-		return result;
+			}
+			System.out.println();
+		}
+
 	}
 }
