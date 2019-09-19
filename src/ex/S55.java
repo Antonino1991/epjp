@@ -12,17 +12,13 @@ public class S55 {
 		long som = 0;
 		if (first < last) {
 
-	
-				for (int i = first; i <= last; i++) {
-					som += i;
-				}
-		}
-				return som;
-
+			for (int i = first; i <= last; i++) {
+				som += i;
 			}
-		
+		}
+		return som;
 
-	
+	}
 
 	/**
 	 * Add up only the even numbers in the passed closed interval
@@ -32,11 +28,15 @@ public class S55 {
 	 * @return the sum of all the even numbers, or zero
 	 */
 	public static long evenSum(int first, int last) {
-		long som= 0;
-		for (int i=first; i<= last;i++) {
-			if 
+		long som = 0;
+		for (int i = first; i <= last; i++) {
+			if (i % 2 == 0) {
+				som += i;
+
+			}
 		}
-		return 0
+		return som;
+
 	}
 
 	/**
@@ -46,8 +46,15 @@ public class S55 {
 	 * @return factorial of input value, or zero
 	 */
 	public static long factorial(int value) {
-		// TODO
-		return 0;
+		if (value < 0) {
+			return 0;
+		}
+		long fac = 1;
+		for (int i = 1; i <= value; i++) {
+			fac *= i;
+
+		}
+		return fac;
 	}
 
 	/**
@@ -57,8 +64,15 @@ public class S55 {
 	 * @return the Fibonacci number of value, or zero
 	 */
 	public static long fibonacci(int value) {
-		// TODO
-		return 0;
+		int fib1 = 0, fib2 = 1, fib3 = 0;
+
+		for (int i = 2; i <= value; i++) {
+			fib3 = fib1 + fib2;
+			fib1 = fib2;
+			fib2 = fib3;
+
+		}
+		return fib3;
 	}
 
 	/**
