@@ -59,10 +59,13 @@ public class S56 {
 	 * @return the converted integer
 	 */
 	public static int bin2dec(String s) {
-		for (int i = 0; i < s.length() - 1; i++) {
-			// string (i)= Math.pow(2, s.length()-1-i);
+		int sum = 0;
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i) == '1') {
+				sum += Math.pow(2, s.length() - 1 - i);
+			}
 		}
-		return 0;
+		return sum;
 	}
 
 	/**
