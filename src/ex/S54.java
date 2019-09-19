@@ -40,6 +40,44 @@ public class S54 {
 	 * @return "zero" for 0 ... "nine" for 9, or "other"
 	 */
 	public static String asWord(int value) {
+
+		switch (value) {
+		case 1:
+			return "zero";
+
+		case 2:
+			return "uno";
+
+		case 3:
+			return "due";
+
+		case 4:
+			return "tre";
+
+		case 5:
+			return "quattro";
+
+		case 6:
+			return "cinque";
+
+		case 7:
+			return "sei";
+
+		case 8:
+			return "sette";
+
+		case 9:
+			return "otto";
+
+		case 10:
+			return "nove";
+
+		default:
+			return "other";
+		}
+	}
+
+	public static String asWord1(int value) {
 		if (value == 0) {
 			return "zero";
 		}
@@ -72,9 +110,9 @@ public class S54 {
 		}
 		if (value == 9) {
 			return "nove";
-		} else
-
+		} else {
 			return "other";
+		}
 	}
 
 	/**
@@ -113,27 +151,21 @@ public class S54 {
 	 */
 	public static int[] sort(int a, int b, int c) {
 		int[] result = { a, b, c };
-	boolean ord;
-	do {
-		ord=false;
-	
-    	for (int i = 0; i< result.length-1; i++) {
-	    		if (result[i]>result[i+1]) {
-	    			int temp= result [i];
-	    			result[i]=result[i+1];
-	    			result[i+1]=temp;
-	    			ord=true;
-	    		}
-    	}
-	}
-	    			while(ord == true);
-	   
-	    			
-	    			
-	    			return result;
-	    		
-	    			
-	
-	
+		boolean ord;
+		do {
+			ord = false;
+
+			for (int i = 0; i < result.length - 1; i++) {
+				if (result[i] > result[i + 1]) {
+					int temp = result[i];
+					result[i] = result[i + 1];
+					result[i + 1] = temp;
+					ord = true;
+				}
+			}
+		} while (ord == true);
+
+		return result;
+
 	}
 }

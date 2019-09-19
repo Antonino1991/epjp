@@ -57,6 +57,13 @@ class S54Test {
     }
 
     @Test
+    void asWordNegative() {
+        String actual = S54.asWord(-3);
+
+        assertThat(actual, is("other"));
+    }
+
+    @Test
     void voteLowA() {
         char actual = S54.vote(90.01);
 
