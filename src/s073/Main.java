@@ -11,12 +11,16 @@ public class Main {
         dog.bark();
 
         // next line leads to a ClassCastException
-        Cat cat = (Cat) pet;
-        System.out.println(System.identityHashCode(cat));
+      //  Cat cat = (Cat) pet;
+      //  System.out.println(System.identityHashCode(cat));
 
         if (pet instanceof Cat) {
             Cat tom = (Cat) pet;
             tom.meow();
         }
+            else {
+            	System.out.println("this pet is not a cat");
+            }
+        }
     }
-}
+

@@ -1,10 +1,10 @@
 package s071;
 
 public class Poodle extends Dog {
-	private static final int DEFAULT_DENSITY = 3;
-	private int curlDensity;
+	private static final int DEFAULT_DENSITY = 3;// costante final di tipo int carattere maiuscolo 
+	private int curlDensity; // densità riccioli
 	
-	public Poodle() {
+	public Poodle() { //costruttore senza parametri default
 		super();
 		this.curlDensity = DEFAULT_DENSITY;
 	}
