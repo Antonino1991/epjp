@@ -6,16 +6,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class WriteHello {
-    public static void main(String[] args) {
-        File f = new File("/tmp/hello.txt");
+	public static void main(String[] args) {
+		File f = new File("/tmp/hello.txt");
 
-        try {
-            PrintWriter pw = new PrintWriter(new FileWriter(f));
-            pw.println("hello");
-            pw.flush();
-            pw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+		try {
+			PrintWriter pw = new PrintWriter(new FileWriter(f));
+			pw.println("hello");
+			pw.flush();
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
