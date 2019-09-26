@@ -39,5 +39,13 @@ class MyListTest {
 		
 		assertThat(ml.size(), is(2));
 	}
+	@Test
+	void getOne() {
+		MyList ml = new MyList();
+		ml.add(23);
+		ml.add(12);
+		
+		assertThat(ml.get(0), is(23));
+	}
 	
 }

@@ -26,14 +26,10 @@ public class MyList {
 		Node next = cur.getNext();
 		while (next == null) {
 			cur = next;
-			
-		}
-		
 
-			 
 		}
 
-	
+	}
 
 	public int size() {
 		int result = 0;
@@ -44,6 +40,20 @@ public class MyList {
 		}
 
 		return result;
+	}
+
+	public int get(int index) {
+		int value = 0;
+		int ind = 0;
+		Node cur = head;
+		while (cur != null) {
+			if (ind <= index) {
+				value = cur.getValue();
+				cur = cur.getNext();
+				ind++;
+			}
+		}
+		return value;
 	}
 
 	@Override
