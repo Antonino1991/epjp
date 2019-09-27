@@ -113,17 +113,19 @@ public class Yahtzee {
 
 	public static int minScala(int[] dice) {
 		int point = 0;
-		Set<Integer> sMin = new TreeSet<Integer>();
-		//for(int i =0; i<)
-	//	if (sMin.size()==5 && )
+		TreeSet<Integer> sMin = new TreeSet<Integer>();
+		for(int i =0; i< dice.length; i++) {
+			
+		
+		}
+	
 		
 
 		return point += 30;
 	}
+
 	public static int maxScala(int[] dice) {
 		int point = 0;
-		
-		
 
 		return point += 40;
 	}
