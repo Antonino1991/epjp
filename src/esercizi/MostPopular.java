@@ -18,8 +18,8 @@ public class MostPopular {
 
 //		map.keySet().size();
 
-		char mostPop = '*';
-		int max = Integer.MIN_VALUE;
+	//	char mostPop = '*';
+	//	int max = Integer.MIN_VALUE;
 		Iterator<Map.Entry<Character, Integer>> it = map.entrySet().iterator();
 
 		while (it.hasNext()) {
