@@ -404,4 +404,46 @@ order by 2;
 select street_address,postal_code,city, country_name
 from locations join countries using (country_id);
 
+select first_name, department_name
+from employees
+join departments using (department_id);
+
+select first_name, department_name
+from employees
+join departments using (department_id)
+join locations using (location_id)
+where city = 'Toronto';
+
+select first_name, last_name
+from employees
+where hire_date > (select hire_date
+from employees 
+where first_name = 'David' and last_name='Lee');
+
+select e.first_name, e.last_name, e.hire_date, m.hire_date
+from employees e join employees m
+on (e.manager_id = m.employee_id)
+where e.hire_date < m.hire_date;
+
+select employee_id,first_name, last_name
+from employees
+where manager_id = (select manager_id from employees where first_name='Lisa' and last_name='Ozer');
+
+select first_name, last_name
+from employees join departments using (department_id)
+where department_name = 'Shipping';
+
+select first_name, last_name
+from employees 
+where regexp_like(last_name, 'u', 'i') 
+order by 2;
+
+select first_name, last_name
+from employees
+where manager_id = (select employee_id from employees where first_name='Steven' and last_name='King');
+
+
+
+
+
 
