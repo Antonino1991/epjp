@@ -306,7 +306,7 @@ on (d.manager_id=e.employee_id)
 where first_name is null ;
 
 select e.first_name as employee, e.last_name as employee,  m.first_name as manager, m.last_name as manager
-from employees e join employees m
+from employees e join employees mq
 on (e.manager_id = m.employee_id)
 order by 1;
 
@@ -320,5 +320,88 @@ where regexp_like(first_name, '[aA].') or regexp_like(last_name, '[aA].') ;
 select first_name, last_name,trunc( months_between (hire_date, sysdate)) 
 from employees;
 
+select first_name, last_name, nvl(to_char(commission_pct), 'no value')as commission
+from employees;
+
+
+select lpad ('*', round(salary/1000) ,'*'), salary
+from employees;
+
+
+select department_id, trunc(avg(salary)) 
+from employees 
+group by department_id order by 2 desc;
+
+select manager_id, trunc(avg(salary)) 
+from employees
+where salary < 8000 
+group by manager_id having avg(salary) > 6000 
+order by 2 desc;
+
+select first_name, last_name 
+from employees 
+where employee_id = (select manager_id from employees where last_name = 'Chen'); 
+
+select department_id, trunc(avg(salary))
+from employees 
+group by department_id having avg(salary) < ( 
+select max(avg(salary)) from employees group by department_id); 
+
+select employee_id 
+from (select employee_id from employees where employee_id between 112 and 115;
+
+
+select first_name, last_name
+from employees
+where employee_id not in (select distinct manager_id from employees where manager_id is not null);
+
+select region_name, country_count 
+from regions natural join ( 
+select region_id, count(rowid) country_count
+from countries    
+group by region_id);
+
+select first_name, last_name
+from employees
+where employee_id in( 
+select distinct manager_id
+from employees where manager_id is not null) 
+order by 2;
+
+select max(salary)as salario_massimo, min(salary)as salario_minimo, trunc(avg(salary))as media, sum(salary)as somma
+from employees;
+
+select job_id ,max (salary)as salario_massimo, min(salary)as salario_minimo, trunc(avg(salary))as media, sum(salary)as somma
+from employees
+group by job_id;
+
+select  job_id , count(employee_id)
+from employees
+group by job_id;
+
+select count(employee_id)
+from employees
+where job_id = 'AC_MGR';
+
+select count(employee_id)
+from employees
+where employee_id not in (select distinct manager_id from employees where manager_id is not null);
+
+select max(salary)-min(salary) as differenza_salario
+from employees;
+
+select max(salary)-min(salary) as differenza_salario
+from employees
+group by job_id
+having max(salary)-min(salary) != 0;
+
+select manager_id, min(salary)
+from employees 
+group by manager_id 
+having (min(salary) >= 6000) and (manager_id is not null)
+order by 2;
+
+select street_address,postal_code,city, country_name
+from locations join countries using (country_id);
 
 
