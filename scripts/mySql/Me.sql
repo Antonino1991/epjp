@@ -1,3 +1,25 @@
+create table items (  
+item_id integer primary key,
+status char,    name varchar2(20),
+coder_id integer);
+
+
+create table coders
+as
+select employee_id as coder_id, first_name, last_name, hire_date, salary
+from hr.employees
+where department_id = 60;
+
+
+select * from coders;
+
+alter table items 
+add constraint items_status_ck 
+check(status in ('A', 'B', 'X')); 
+
+insert into items
+values K ;
+
 drop table trainees;
 drop table courses;
 drop sequence trainee_seq;
@@ -54,5 +76,68 @@ create table trainees (
     
     select * from trainees;
     commit;
-    
 
+create or replace view phone_view as
+select first_name, last_name, phone_number
+from hr.employees
+where employee_id not in (select manager_id from hr.employees where manager_id != employee_id) 
+with read only;
+
+select*
+from phone_view;
+
+drop view phone_view;
+
+
+
+drop sequence coder_seq;
+
+create sequence coder_seq start with 201 ;
+
+insert into coders(coder_id,first_name,last_name,hire_date,salary)
+values(coder_seq.nextval,'Maria','Rossi',sysdate,5000);
+insert into coders(coder_id,first_name,last_name,hire_date,salary)
+values(coder_seq.nextval,'Franco','Bianchi',sysdate,4500);
+
+update coders 
+set first_name = 'Mariangela' 
+where coder_id=201;
+
+update coders 
+set salary = salary + 500 
+where salary < 6000;
+
+delete from coders 
+where first_name= 'Franco' and last_name='Bianchi';
+
+commit;
+
+set serveroutput on
+begin 
+dbms_output.put_line('Hello PL/SQL');
+end;
+/
+
+declare    v_width integer; 
+v_height integer := 6;
+v_area integer := 7; 
+begin   
+v_width := v_area / v_height; 
+dbms_output.put_line(
+'v_width = ' || v_width);
+end; 
+/
+
+declare 
+v_a integer := -1; 
+begin    
+if v_a > 0 
+then       
+dbms_output.put_line('v_a is positive');
+elsif v_a = 0 then        
+dbms_output.put_line('v_a is zero');
+else 
+dbms_output.put_line('v_a is negative');
+end if;
+end;
+/
