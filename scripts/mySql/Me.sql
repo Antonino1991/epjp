@@ -141,3 +141,184 @@ dbms_output.put_line('v_a is negative');
 end if;
 end;
 /
+
+declare 
+cursor v_coder_cursor is  
+select last_name, hire_date from coders;
+begin
+for v_cur in v_coder_cursor loop 
+dbms_output.put_line( 
+'[' || v_cur.last_name || ', ' || v_cur.hire_date || ']');
+end loop; end;
+/
+
+
+declare
+cursor v_coder_cursor is
+select last_name, first_name, phone_number from phone_view;
+begin
+for v_cur in v_coder_cursor loop
+dbms_output.put_line( 
+'[' || v_cur.last_name || ', ' || v_cur.first_name || ',' || v_cur.phone_number || ']');
+end loop;
+end;
+/
+
+
+
+declare
+cursor v_number_cursor is
+select first_name, last_name, phone_number
+from phone_view
+where regexp_like(first_name, '[A].') or regexp_like(last_name, '[A].')
+order by 1;
+begin
+for v_cur in v_number_cursor loop
+dbms_output.put_line( 
+'[' || v_cur.last_name || ', ' || v_cur.first_name || ', ' || v_cur.phone_number || ']');
+end loop;
+end;
+/
+
+set serveroutput on
+create or replace procedure get_coder_salary(
+p_coder_id in coders.coder_id%type,
+p_salary out coders.salary%type)
+is begin
+select salary
+into p_salary
+from coders 
+where coder_id = p_coder_id;
+end get_coder_salary;
+/ 
+
+declare 
+v_id coders.coder_id%type := 105; 
+v_salary coders.salary%type;
+begin 
+get_coder_salary(v_id, v_salary);
+dbms_output.put_line('Salary is ' || v_salary);
+exception  
+when others then
+dbms_output.put_line('Can''t get salary for ' || v_id);
+end;
+/
+set serveroutput on
+create or replace procedure increase_coder_salary (
+    p_coder_id in coders.coder_id%type,
+    p_increase_salary in coders.salary%type,
+    p_result_salary out coders.salary%type ) is
+    v_salary coders.salary%type;
+begin
+    select salary 
+    into v_salary
+    from coders
+    where coder_id = p_coder_id;
+    p_result_salary := v_salary + p_increase_salary ;
+
+    update coders 
+    set salary = salary + p_increase_salary 
+    where coder_id = p_coder_id;
+    
+end increase_coder_salary;
+/
+
+declare
+    v_id coders.coder_id%type := 105;
+    v_increase coders.salary%type := 100;
+    v_result coders.salary%type;
+begin 
+   increase_coder_salary(v_id ,v_increase, v_result);
+   dbms_output.put_line('Result is ' || v_result); 
+end;
+/
+ create or replace function increase_salary(
+ p_coder_id in coders.coder_id%type,
+ p_increase_salary in coders.salary%type)
+ return number as
+ v_salary coders.salary%type;
+
+ begin
+ select salary
+ into v_salary 
+ from coders
+ where coder_id = p_coder_id;
+ return v_salary + p_increase_salary;
+ end increase_salary;
+ /
+delete from coders where coder_id = 201; 
+
+
+
+alter table coders add constraint coders_pk primary key(coder_id) ;
+ create table coder_salaries (
+ coder_id number(6, 0) 
+ references coders(coder_id),
+ old_salary number(8, 2),
+ new_salary number(8, 2)
+ );
+ 
+
+ create or replace trigger salary_update
+ before update of salary on coders
+ for each row
+ begin  
+ insert into coder_salaries values
+ ( :old.coder_id, :old.salary, :new.salary);
+ end salary_update;
+ /
+
+update coders
+set salary = salary * 1.3
+where coder_id > 103;
+
+
+
+create or replace procedure tomorrow
+is
+begin
+dbms_output.put_line(sysdate + 1); 
+end tomorrow;
+/
+
+
+
+begin
+tomorrow(); 
+end;
+/
+
+
+create or replace procedure tomorrow(
+p_name in varchar2)is
+begin
+
+dbms_output.put_line(sysdate + 1 || ' ' || p_name); 
+end;
+/
+
+declare
+v_name varchar2(120) := 'Ciao Antonino questa è la data di domani';
+begin
+tomorrow(v_name); 
+end;
+/
+
+create or replace procedure get_coders(
+    p_coder_id in coders.coder_id%type,
+    p_first_name out coders.first_name%type,
+    p_last_name out coders.last_name%type) is
+begin
+select first_name,last_name
+into p_first_name, p_last_name 
+from coders
+where p_coder_id = coder_id;
+end get_coders;
+/
+
+
+
+
+
+
+commit;
